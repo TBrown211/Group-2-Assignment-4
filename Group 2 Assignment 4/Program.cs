@@ -6,7 +6,8 @@ namespace Group_2_Assignment_4
     internal class Program
     {
         // If you need variables in the Program class (outside functions), you must mark them as static
-        static string title = "Game Title";
+        static string title = "Medievil Pong";
+        static Ball ball;
 
         static void Main(string[] args)
         {
