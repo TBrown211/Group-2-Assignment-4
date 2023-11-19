@@ -25,7 +25,7 @@ namespace Group_2_Assignment_4
                 // Enable drawing to the canvas (window)
                 Raylib.BeginDrawing();
                 // Clear the canvas with one color
-                Raylib.ClearBackground(Color.WHITE);
+                Raylib.ClearBackground(Color.RAYWHITE);
 
                 // Your game code here. This is a function YOU define.
                 Update();
@@ -39,12 +39,12 @@ namespace Group_2_Assignment_4
 
         static void Setup()
         {
-            // Your one-time setup code here
+            ball = new Ball();
         }
 
         static void Update()
         {
-            // Your game code run each frame here
+            ball.Draw();
         }
     }
 }
