@@ -45,6 +45,7 @@ namespace Obstacle_Mapping
         static void Setup()
         {
             Lvl1();
+            
 
 
         }
@@ -77,22 +78,23 @@ namespace Obstacle_Mapping
             
         }
 
-        public void Lvl2()
+        static public void Lvl2()
         {
             int obsRows = 2;
             int obsCols = 2;
             obstacles = new Obstacle[obsRows * obsCols];
 
-            for (int i = 0; i <= obstacles.Length; i++)
+            for (int i = 0; i < obstacles.Length; i++)
             {
                 int horizontalIndex = i % obsCols;
                 int verticalIndex = i / obsCols;
-                int obstaclePositionX;
-                int obstaclePositionY;
+                int obstaclePositionX = 300 + (150 * horizontalIndex);
+                int obstaclePositionY = 50 + (400 * verticalIndex);
+                obstacles[i] = new Obstacle(new Vector2(obstaclePositionX, obstaclePositionY), new Vector2(obstacleWidth, obstacleHeight), Color.VIOLET);
             }
         }
 
-        public void Lvl3()
+        static public void Lvl3()
         {
 
         }
