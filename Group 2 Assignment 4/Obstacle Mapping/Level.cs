@@ -8,9 +8,8 @@ namespace Obstacle_Mapping
         static public Obstacle[] obstacles;
         static int obstacleWidth = 50;
         static int obstacleHeight = 50;
-        Vector2 obstaclePos;
-        Vector2 obstacleSize;
-        Color obstacleColor;        
+        static float obstacleSpeedX = 100;
+        static float obstacleSpeedY = 100;
 
         static string title = "Game Title";
 
@@ -44,7 +43,7 @@ namespace Obstacle_Mapping
 
         static void Setup()
         {
-            Lvl1();
+            Lvl3();
             
 
 
@@ -92,11 +91,51 @@ namespace Obstacle_Mapping
                 int obstaclePositionY = 50 + (400 * verticalIndex);
                 obstacles[i] = new Obstacle(new Vector2(obstaclePositionX, obstaclePositionY), new Vector2(obstacleWidth, obstacleHeight), Color.VIOLET);
             }
+
         }
 
         static public void Lvl3()
         {
+            Vector2 startPosition = new Vector2(350, 350);
+            obstacleSpeedX = startPosition.X * obstacleSpeedX + Raylib.GetFrameTime();
+            obstacleSpeedY = startPosition.Y * obstacleSpeedY + Raylib.GetFrameTime();
+            obstacles = new Obstacle[1];
+            bool objectMoveUp = startPosition.X <= 500;
+            bool objectMoveLeft = startPosition.Y >= 150;
+            bool objectMoveDown = startPosition.X >= 250;
+            bool objectMoveRight = startPosition.Y <= 350;
+            
+            for(int i = 0;i < obstacles.Length; i++)
+            {
+                float obstacleMovX = startPosition.X + obstacleSpeedX;
+                float obstacleMovY = startPosition.Y;
+                obstacles[i] = new Obstacle(new Vector2(obstacleMovX, obstacleMovY), new Vector2(obstacleWidth, obstacleHeight), Color.GOLD);
+                if (objectMoveUp)
+                {
+                    obstacleMovX = startPosition.X;
+                    obstacleMovY = startPosition.Y - obstacleSpeedY;
 
+                }
+                else if (objectMoveLeft)
+                {
+                    obstacleMovX = startPosition.X - obstacleSpeedX;
+                    obstacleMovX = startPosition.Y;
+                }
+                else if (objectMoveDown)
+                {
+                    obstacleMovX = startPosition.X;
+                    obstacleMovX = startPosition.Y + obstacleSpeedY;
+                }
+                else if(objectMoveRight)
+                {
+                    obstacleMovX = startPosition.X + obstacleSpeedX;
+                    obstacleMovX = startPosition.Y;
+                }
+                else
+                {
+
+                }
+            }
 
         }
     }
