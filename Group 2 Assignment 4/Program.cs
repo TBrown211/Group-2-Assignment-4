@@ -8,6 +8,8 @@ namespace Group_2_Assignment_4
         // If you need variables in the Program class (outside functions), you must mark them as static
         static string title = "Medievil Pong";
         static Ball ball;
+        static int leftPlayerScore = 0;
+        static int rightPlayerScore = 0;
 
         static void Main(string[] args)
         {
@@ -44,7 +46,25 @@ namespace Group_2_Assignment_4
 
         static void Update()
         {
+
+            ball.MoveBall();
+            ball.CollideBall();
+            if (ball.BallIsPastLeftEdge())
+            {
+                leftPlayerScore++;
+                ball.ResetBall();
+            }
+            if (ball.BallIsPastRightEdge())
+            {
+                rightPlayerScore++;
+                ball.ResetBall();
+            }
+
+            Raylib.DrawText(leftPlayerScore.ToString(), 50, 50, 32, Color.BLACK);
+            Raylib.DrawText(rightPlayerScore.ToString(), 750, 50, 32, Color.BLACK);
+
             ball.Draw();
         }
+
     }
 }

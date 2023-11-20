@@ -10,11 +10,8 @@ namespace Group_2_Assignment_4
         float radius;
         public Ball() 
         {
-            position.X = 400;
-            position.Y = 300;
             radius = 10;
-            speed.X = 100;
-            speed.Y = 100;
+            ResetBall();
         }
 
         public void Draw()
@@ -39,6 +36,34 @@ namespace Group_2_Assignment_4
             {
                 speed.Y = -speed.Y;
             }
+        }
+
+        public bool BallIsPastLeftEdge()
+        {
+            float leftEdge = 0;
+            bool hasPastLeft = position.X < leftEdge;
+            return hasPastLeft;
+        }
+
+        public bool BallIsPastRightEdge()
+        {
+            float rightEdge = Raylib.GetScreenWidth();
+            bool hasPastRight = position.X > rightEdge;
+            return hasPastRight;
+        }
+
+        public void ResetBall()
+        {
+            position.X = 400;
+            position.Y = 300;
+            Random direction = new Random();
+            speed.X = direction.Next(-200, 200);
+            speed.Y = direction.Next(-200, 200);
+        }
+
+        public void TheSoundOfBall()
+        {
+
         }
     }
 }
