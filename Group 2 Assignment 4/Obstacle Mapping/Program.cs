@@ -1,10 +1,11 @@
-﻿namespace Obstacle_Mapping
+﻿using Raylib_cs;
+using System.Numerics;
+namespace Obstacle_Mapping
 {
     internal class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello, World!");
-        }
+    {        
+     
+
+
     }
 }
