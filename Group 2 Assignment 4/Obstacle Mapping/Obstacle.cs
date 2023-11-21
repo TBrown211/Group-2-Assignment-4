@@ -8,8 +8,11 @@ namespace Obstacle_Mapping
         Vector2 obstaclePos;
         Vector2 obstacleSize;
         Color obstacleColor;
+        int obstacleSpeedX = 100;
+        int obstacleSpeedY = 100;
         public Obstacle(Vector2 position, Vector2 size, Color color)
         {
+            //Initializing the required inputs for the obstacle
             obstaclePos = position;
             obstacleSize = size;
             obstacleColor = color;
@@ -17,7 +20,10 @@ namespace Obstacle_Mapping
 
         public void DrawObstacle()
         {
+            //Draw the obstacle on screen
             Raylib.DrawRectangleV(obstaclePos, obstacleSize, obstacleColor);
         }
+
+       
     }
 }

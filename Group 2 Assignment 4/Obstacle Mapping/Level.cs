@@ -10,6 +10,7 @@ namespace Obstacle_Mapping
         static int obstacleHeight = 50;
         static float obstacleSpeedX = 100;
         static float obstacleSpeedY = 100;
+        static Random rng = new Random();
 
         static string title = "Game Title";
 
@@ -54,15 +55,15 @@ namespace Obstacle_Mapping
             for (int j = 0; j < obstacles.Length; j++)
             {
                 obstacles[j].DrawObstacle();
-
             }
-
+            
 
 
         }
 
         static public void Lvl1()
         {
+            //Initializing the first level 
             int obsRows = 4;
             int obsCols = 1;
             obstacles = new Obstacle[obsRows * obsCols];
@@ -87,8 +88,8 @@ namespace Obstacle_Mapping
             {
                 int horizontalIndex = i % obsCols;
                 int verticalIndex = i / obsCols;
-                int obstaclePositionX = 300 + (150 * horizontalIndex);
-                int obstaclePositionY = 50 + (400 * verticalIndex);
+                int obstaclePositionX = 250 + (250 * horizontalIndex);
+                int obstaclePositionY = 100 + (300 * verticalIndex);
                 obstacles[i] = new Obstacle(new Vector2(obstaclePositionX, obstaclePositionY), new Vector2(obstacleWidth, obstacleHeight), Color.VIOLET);
             }
 
@@ -96,45 +97,25 @@ namespace Obstacle_Mapping
 
         static public void Lvl3()
         {
-            Vector2 startPosition = new Vector2(350, 350);
-            obstacleSpeedX = startPosition.X * obstacleSpeedX + Raylib.GetFrameTime();
-            obstacleSpeedY = startPosition.Y * obstacleSpeedY + Raylib.GetFrameTime();
-            obstacles = new Obstacle[1];
-            bool objectMoveUp = startPosition.X <= 500;
-            bool objectMoveLeft = startPosition.Y >= 150;
-            bool objectMoveDown = startPosition.X >= 250;
-            bool objectMoveRight = startPosition.Y <= 350;
+            //
+            float time = (float)Raylib.GetTime();
+            float secondPerCycle = time / 5;
+            float cycle = secondPerCycle * MathF.Tau;
+
+            //Positioning of our wave
+            float waveStartY = 0f;
+            float waveOffset = MathF.Cos(cycle) * 600;
+            float obstaclePositionY = waveStartY + waveOffset;
+            
+            obstacles = new Obstacle[2];
+            
             
             for(int i = 0;i < obstacles.Length; i++)
             {
-                float obstacleMovX = startPosition.X + obstacleSpeedX;
-                float obstacleMovY = startPosition.Y;
-                obstacles[i] = new Obstacle(new Vector2(obstacleMovX, obstacleMovY), new Vector2(obstacleWidth, obstacleHeight), Color.GOLD);
-                if (objectMoveUp)
-                {
-                    obstacleMovX = startPosition.X;
-                    obstacleMovY = startPosition.Y - obstacleSpeedY;
-
-                }
-                else if (objectMoveLeft)
-                {
-                    obstacleMovX = startPosition.X - obstacleSpeedX;
-                    obstacleMovX = startPosition.Y;
-                }
-                else if (objectMoveDown)
-                {
-                    obstacleMovX = startPosition.X;
-                    obstacleMovX = startPosition.Y + obstacleSpeedY;
-                }
-                else if(objectMoveRight)
-                {
-                    obstacleMovX = startPosition.X + obstacleSpeedX;
-                    obstacleMovX = startPosition.Y;
-                }
-                else
-                {
-
-                }
+                int horizontalIndex = i;
+                float obstaclePositionX = 250 + (250 * horizontalIndex);
+                 obstacles[i] = new Obstacle(new Vector2(obstaclePositionX, obstaclePositionY), new Vector2(obstacleWidth, obstacleHeight), Color.GOLD);
+                
             }
 
         }
