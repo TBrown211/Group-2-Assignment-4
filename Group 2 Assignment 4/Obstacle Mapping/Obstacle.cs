@@ -9,7 +9,8 @@ namespace Obstacle_Mapping
         Vector2 obstacleSize;
         Color obstacleColor;
         int obstacleSpeedX = 100;
-        int obstacleSpeedY = 100;        
+        int obstacleSpeedY = 100; 
+        Random rng = new Random();  
 
         public Obstacle(Vector2 position, Vector2 size, Color color)
         {
@@ -17,6 +18,7 @@ namespace Obstacle_Mapping
             obstaclePos = position;
             obstacleSize = size;
             obstacleColor = color;
+            
         }
 
         public void DrawObstacle()

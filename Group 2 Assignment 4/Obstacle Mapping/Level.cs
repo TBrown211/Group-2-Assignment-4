@@ -11,9 +11,7 @@ namespace Obstacle_Mapping
         static float obstacleSpeedX = 100;
         static float obstacleSpeedY = 100;
         static Random rng = new Random();
-
         static string title = "Game Title";
-
         static void Main(string[] args)
         {
             // Create a window to draw to. The arguments define width and height
@@ -30,7 +28,7 @@ namespace Obstacle_Mapping
                 // Enable drawing to the canvas (window)
                 Raylib.BeginDrawing();
                 // Clear the canvas with one color
-                Raylib.ClearBackground(Color.WHITE);
+                Raylib.ClearBackground(Color.BLACK);
 
                 // Your game code here. This is a function YOU define.
                 Update();
@@ -44,22 +42,21 @@ namespace Obstacle_Mapping
 
         static void Setup()
         {
-            Lvl3();
-            
-
+            Lvl1();   
 
         }
 
         static void Update()
         {
-            for (int j = 0; j < obstacles.Length; j++)
+            for (int i = 0; i < obstacles.Length; i++)
             {
-                obstacles[j].DrawObstacle();
+                obstacles[i].DrawObstacle();
             }
-            
-
-
+           
         }
+
+
+
 
         static public void Lvl1()
         {
@@ -72,13 +69,13 @@ namespace Obstacle_Mapping
                 int verticalIndex = i / obsCols;
                 int obstaclePositionX = 400;
                 int obstaclePositionY = 50 + (150 * verticalIndex);
-                obstacles[i] = new Obstacle(new Vector2(obstaclePositionX, obstaclePositionY), new Vector2(obstacleWidth, obstacleHeight), Color.RED);               
+                obstacles[i] = new Obstacle(new Vector2(obstaclePositionX, obstaclePositionY), new Vector2(obstacleWidth, obstacleHeight), Color.RED);              
 
-            }
+            }            
             
         }
 
-        static public void Lvl2()
+        public void Lvl2()
         {
             int obsRows = 2;
             int obsCols = 2;
@@ -95,7 +92,7 @@ namespace Obstacle_Mapping
 
         }
 
-        static public void Lvl3()
+        public void Lvl3()
         {
             //
             float time = (float)Raylib.GetTime();
