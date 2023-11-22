@@ -74,6 +74,10 @@ namespace Group_2_Assignment_4
 
         }
 
+        public void FireBallIsReflected()
+        {
+            position.X = -position.X;
+        }
         public void TheSoundOfFireBall()
         {
 
