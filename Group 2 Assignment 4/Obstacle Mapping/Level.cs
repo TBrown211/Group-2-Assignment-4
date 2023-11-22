@@ -12,6 +12,7 @@ namespace Obstacle_Mapping
         static float obstacleSpeedY = 100;
         static Random rng = new Random();
         static string title = "Game Title";
+        static Texture2D level;
         static void Main(string[] args)
         {
             // Create a window to draw to. The arguments define width and height
@@ -28,7 +29,9 @@ namespace Obstacle_Mapping
                 // Enable drawing to the canvas (window)
                 Raylib.BeginDrawing();
                 // Clear the canvas with one color
-                Raylib.ClearBackground(Color.BLACK);
+
+                Raylib.ClearBackground(Color.BLANK);
+                
 
                 // Your game code here. This is a function YOU define.
                 Update();
@@ -42,17 +45,21 @@ namespace Obstacle_Mapping
 
         static void Setup()
         {
-            Lvl1();   
+
+            Lvl1();
+            
 
         }
 
         static void Update()
         {
+            Raylib.DrawTexture(level, 0, 0, Color.WHITE);
             for (int i = 0; i < obstacles.Length; i++)
             {
                 obstacles[i].DrawObstacle();
             }
-           
+
+
         }
 
 
@@ -61,6 +68,7 @@ namespace Obstacle_Mapping
         static public void Lvl1()
         {
             //Initializing the first level 
+            level = BackgroundTextures("battleback10.png");
             int obsRows = 4;
             int obsCols = 1;
             obstacles = new Obstacle[obsRows * obsCols];
@@ -71,7 +79,7 @@ namespace Obstacle_Mapping
                 int obstaclePositionY = 50 + (150 * verticalIndex);
                 obstacles[i] = new Obstacle(new Vector2(obstaclePositionX, obstaclePositionY), new Vector2(obstacleWidth, obstacleHeight), Color.RED);              
 
-            }            
+            }
             
         }
 
@@ -122,8 +130,8 @@ namespace Obstacle_Mapping
             int backgroungWidth = Raylib.GetScreenWidth();
             int backgroundHeight = Raylib.GetScreenHeight();
             //Loading textures for level background
-            Image mapBackground = Raylib.LoadImage($"../../../../../BG 2.0/BG/{filename}");
-            Texture2D mapTexture = Raylib.LoadTextureFromImage(mapBackground1);
+            Image levelBackground = Raylib.LoadImage($"../../../../../BG 2.0/BG/{filename}");
+            Texture2D mapTexture = Raylib.LoadTextureFromImage(levelBackground);
 
             return mapTexture;
         }
