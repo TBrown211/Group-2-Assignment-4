@@ -38,21 +38,21 @@ namespace Group_2_Assignment_4
             }
         }
 
-        public bool BallIsPastLeftEdge()
+        public bool BallIsPastLeftEdge() //Checks to see if the ball is past the left side of the screen
         {
             float leftEdge = 0;
             bool hasPastLeft = position.X < leftEdge;
             return hasPastLeft;
         }
 
-        public bool BallIsPastRightEdge()
+        public bool BallIsPastRightEdge() //Checks to see if the ball is past the right side of the screen
         {
             float rightEdge = Raylib.GetScreenWidth();
             bool hasPastRight = position.X > rightEdge;
             return hasPastRight;
         }
-
-        public void ResetFireBall()
+        
+        public void ResetFireBall() // This will set the fireball at the center of the screen and have it go into a random direction at the start of each round
         {
             position.X = 400;
             position.Y = 300;
@@ -74,17 +74,17 @@ namespace Group_2_Assignment_4
 
         }
 
-        public void FireBallIsReflected()
+        public void FireBallIsReflected() //Call this when the ball hits the paddle
         {
             position.X = -position.X;
         }
 
-        public Vector2 FireBallPosition() 
+        public Vector2 FireBallPosition() //Call this function when you want to get the position of the fireball for other parts of the code.
         {
             return position; 
         }
 
-        public float FireBallRadius()
+        public float FireBallRadius() //Call this function when you want to get the radius of the fireball for other parts of the code.
         {
             return radius;
         }
