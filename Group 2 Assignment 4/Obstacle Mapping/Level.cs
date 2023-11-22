@@ -8,6 +8,7 @@ namespace Obstacle_Mapping
         static public Obstacle[] obstacles;
         static int obstacleWidth = 50;
         static int obstacleHeight = 50;
+        static Vector2 obstaclePosition;
         static float obstacleSpeedX = 100;
         static float obstacleSpeedY = 100;
         static Random rng = new Random();
@@ -46,7 +47,7 @@ namespace Obstacle_Mapping
         static void Setup()
         {
 
-            Lvl1();
+            Lvl3();
             
 
         }
@@ -54,9 +55,12 @@ namespace Obstacle_Mapping
         static void Update()
         {
             Raylib.DrawTexture(level, 0, 0, Color.WHITE);
+           
             for (int i = 0; i < obstacles.Length; i++)
             {
                 obstacles[i].DrawObstacle();
+                obstacles[i].MoveObstacle();
+                obstacles[i].ObstacleScreenBoundaries();
             }
 
 
@@ -83,7 +87,7 @@ namespace Obstacle_Mapping
             
         }
 
-        public void Lvl2()
+        static public void Lvl2()
         {
             int obsRows = 2;
             int obsCols = 2;
@@ -93,42 +97,32 @@ namespace Obstacle_Mapping
             {
                 int horizontalIndex = i % obsCols;
                 int verticalIndex = i / obsCols;
-                int obstaclePositionX = 250 + (250 * horizontalIndex);
-                int obstaclePositionY = 100 + (300 * verticalIndex);
-                obstacles[i] = new Obstacle(new Vector2(obstaclePositionX, obstaclePositionY), new Vector2(obstacleWidth, obstacleHeight), Color.VIOLET);
+                obstaclePosition.X = 250 + (250 * horizontalIndex);
+                obstaclePosition.Y = 100 + (300 * verticalIndex);
+                obstacles[i] = new Obstacle(new Vector2(obstaclePosition.X, obstaclePosition.Y), new Vector2(obstacleWidth, obstacleHeight), Color.VIOLET);
             }
 
         }
 
-        public void Lvl3()
+        static public void Lvl3()
         {
-            //
-            float time = (float)Raylib.GetTime();
-            float secondPerCycle = time / 5;
-            float cycle = secondPerCycle * MathF.Tau;
-
-            //Positioning of our wave
-            float waveStartY = 0f;
-            float waveOffset = MathF.Cos(cycle) * 600;
-            float obstaclePositionY = waveStartY + waveOffset;
             
             obstacles = new Obstacle[2];
             
             
             for(int i = 0;i < obstacles.Length; i++)
-            {
+            {             
                 int horizontalIndex = i;
                 float obstaclePositionX = 250 + (250 * horizontalIndex);
+                float obstaclePositionY = 50;                
                  obstacles[i] = new Obstacle(new Vector2(obstaclePositionX, obstaclePositionY), new Vector2(obstacleWidth, obstacleHeight), Color.GOLD);
-                
+               
             }
 
         }
 
         static public Texture2D BackgroundTextures(string filename)
-        {
-            int backgroungWidth = Raylib.GetScreenWidth();
-            int backgroundHeight = Raylib.GetScreenHeight();
+        {            
             //Loading textures for level background
             Image levelBackground = Raylib.LoadImage($"../../../../../BG 2.0/BG/{filename}");
             Texture2D mapTexture = Raylib.LoadTextureFromImage(levelBackground);

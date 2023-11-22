@@ -8,8 +8,8 @@ namespace Obstacle_Mapping
         Vector2 obstaclePos;
         Vector2 obstacleSize;
         Color obstacleColor;
-        int obstacleSpeedX = 100;
-        int obstacleSpeedY = 100; 
+        float obstacleSpeedX = 100;
+        float obstacleSpeedY = 100; 
         Random rng = new Random();  
 
         public Obstacle(Vector2 position, Vector2 size, Color color)
@@ -18,7 +18,7 @@ namespace Obstacle_Mapping
             obstaclePos = position;
             obstacleSize = size;
             obstacleColor = color;
-            
+            obstacleSpeedY = obstacleSpeedY * rng.NextSingle();
         }
 
         public void DrawObstacle()
@@ -29,23 +29,23 @@ namespace Obstacle_Mapping
 
         public void MoveObstacle()
         {
-            obstaclePos += obstaclePos * new Vector2(obstacleSpeedX, obstacleSpeedY) * Raylib.GetFrameTime();          
+            obstaclePos.Y = obstaclePos.Y + obstacleSpeedY * Raylib.GetFrameTime();
         } 
 
         public void ObstacleScreenBoundaries()
         {
             float topBorder = 0;
             float bottomBorder = Raylib.GetScreenHeight();
-            bool obstacleTopCollide = obstaclePos.Y >= topBorder;
-            bool obstacleBottomCollide = obstaclePos.Y <= bottomBorder;
+            bool obstacleTopCollide = obstaclePos.Y <= topBorder;
+            bool obstacleBottomCollide = obstaclePos.Y + obstacleSize.Y >= bottomBorder;
 
             if (obstacleTopCollide)
             {
-                obstacleSpeedY += obstacleSpeedY;
+                obstacleSpeedY = -obstacleSpeedY;
             }
             if (obstacleBottomCollide)
             {
-                obstacleSpeedY -= obstacleSpeedY;
+                obstacleSpeedY = -obstacleSpeedY;
             }
         }
 
