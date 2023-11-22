@@ -78,6 +78,16 @@ namespace Group_2_Assignment_4
         {
             position.X = -position.X;
         }
+
+        public Vector2 FireBallPosition() 
+        {
+            return position; 
+        }
+
+        public float FireBallRadius()
+        {
+            return radius;
+        }
         public void TheSoundOfFireBall()
         {
 
