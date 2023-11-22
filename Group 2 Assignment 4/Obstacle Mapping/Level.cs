@@ -116,5 +116,16 @@ namespace Obstacle_Mapping
             }
 
         }
+
+        static public Texture2D BackgroundTextures(string filename)
+        {
+            int backgroungWidth = Raylib.GetScreenWidth();
+            int backgroundHeight = Raylib.GetScreenHeight();
+            //Loading textures for level background
+            Image mapBackground = Raylib.LoadImage($"../../../../../BG 2.0/BG/{filename}");
+            Texture2D mapTexture = Raylib.LoadTextureFromImage(mapBackground1);
+
+            return mapTexture;
+        }
     }
 }
