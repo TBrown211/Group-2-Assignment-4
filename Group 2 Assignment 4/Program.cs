@@ -49,15 +49,15 @@ namespace Group_2_Assignment_4
 
             ball.MoveBall();
             ball.CollideBall();
-            if (ball.BallIsPastLeftEdge())
-            {
-                leftPlayerScore++;
-                ball.ResetBall();
-            }
             if (ball.BallIsPastRightEdge())
             {
+                leftPlayerScore++;
+                ball.ResetFireBall();
+            }
+            if (ball.BallIsPastLeftEdge())
+            {
                 rightPlayerScore++;
-                ball.ResetBall();
+                ball.ResetFireBall();
             }
 
             Raylib.DrawText(leftPlayerScore.ToString(), 50, 50, 32, Color.BLACK);

@@ -11,12 +11,12 @@ namespace Group_2_Assignment_4
         public Ball() 
         {
             radius = 10;
-            ResetBall();
+            ResetFireBall();
         }
 
         public void Draw()
         {
-            Raylib.DrawCircleV(position, radius, Color.BLACK);
+            Raylib.DrawCircleV(position, radius, Color.RED);
         }
 
         public void MoveBall()
@@ -52,16 +52,29 @@ namespace Group_2_Assignment_4
             return hasPastRight;
         }
 
-        public void ResetBall()
+        public void ResetFireBall()
         {
             position.X = 400;
             position.Y = 300;
             Random direction = new Random();
             speed.X = direction.Next(-200, 200);
             speed.Y = direction.Next(-200, 200);
+
+            if (MathF.Abs(speed.X) < 200)
+            {
+                if (MathF.Sign(speed.X) > 0) 
+                {
+                    speed.X = 200;
+                }
+                else
+                {
+                    speed.X = -200;
+                }
+            }
+
         }
 
-        public void TheSoundOfBall()
+        public void TheSoundOfFireBall()
         {
 
         }
