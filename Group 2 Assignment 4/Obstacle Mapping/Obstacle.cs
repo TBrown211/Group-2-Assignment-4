@@ -9,7 +9,8 @@ namespace Obstacle_Mapping
         Vector2 obstacleSize;
         Color obstacleColor;
         float obstacleSpeedX = 100;
-        float obstacleSpeedY = 100; 
+        float obstacleSpeedY = 100;
+        Texture2D mob;
         Random rng = new Random();  
 
         public Obstacle(Vector2 position, Vector2 size, Color color)
@@ -22,7 +23,7 @@ namespace Obstacle_Mapping
         }
 
         public void DrawObstacle()
-        {
+        {            
             //Draw the obstacle on screen
             Raylib.DrawRectangleV(obstaclePos, obstacleSize, obstacleColor);
         }
@@ -47,6 +48,16 @@ namespace Obstacle_Mapping
             {
                 obstacleSpeedY = -obstacleSpeedY;
             }
+        }
+
+        public Texture2D DrawMobImage(string filename)
+        {
+            //Loading texture assets for the obstacles            
+            Image mobAsset = Raylib.LoadImage($"../../../../../BG 2.0/BG/{filename}");
+            Texture2D obstacleImage = Raylib.LoadTextureFromImage(mobAsset);
+            
+            return obstacleImage;
+
         }
 
        
