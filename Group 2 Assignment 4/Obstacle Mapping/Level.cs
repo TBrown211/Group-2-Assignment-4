@@ -14,6 +14,7 @@ namespace Obstacle_Mapping
         static Random rng = new Random();
         static string title = "Game Title";
         static Texture2D level;
+        
         static void Main(string[] args)
         {
             // Create a window to draw to. The arguments define width and height
@@ -47,7 +48,7 @@ namespace Obstacle_Mapping
         static void Setup()
         {
 
-            Lvl3();
+            Lvl2();
             
 
         }
@@ -81,7 +82,7 @@ namespace Obstacle_Mapping
                 int verticalIndex = i / obsCols;
                 int obstaclePositionX = 400;
                 int obstaclePositionY = 50 + (150 * verticalIndex);
-                obstacles[i] = new Obstacle(obstaclePositionX, obstaclePositionY, obstacleWidth, obstacleHeight, Color.RED);              
+                obstacles[i] = new Obstacle(new Vector2(obstaclePositionX, obstaclePositionY), new Vector2(obstacleWidth, obstacleHeight), Color.RED);              
 
             }
             
@@ -89,6 +90,7 @@ namespace Obstacle_Mapping
 
         static public void Lvl2()
         {
+            level = BackgroundTextures("battleback9.png");
             int obsRows = 2;
             int obsCols = 2;
             obstacles = new Obstacle[obsRows * obsCols];
@@ -99,7 +101,7 @@ namespace Obstacle_Mapping
                 int verticalIndex = i / obsCols;
                 obstaclePosition.X = 250 + (250 * horizontalIndex);
                 obstaclePosition.Y = 100 + (300 * verticalIndex);
-                obstacles[i] = new Obstacle(obstaclePosition.X, obstaclePosition.Y), new Vector2(obstacleWidth, obstacleHeight), Color.VIOLET);
+                obstacles[i] = new Obstacle(new Vector2(obstaclePosition.X, obstaclePosition.Y), new Vector2(obstacleWidth, obstacleHeight), Color.VIOLET);
             }
 
         }
