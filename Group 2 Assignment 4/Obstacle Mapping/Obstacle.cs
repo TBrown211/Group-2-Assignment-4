@@ -5,33 +5,43 @@ namespace Obstacle_Mapping
 {
     internal class Obstacle
     {
-        Vector2 obstaclePos;
+        Vector2 obstaclePos;        
+        Texture2D obstacleTexture;
         Vector2 obstacleSize;
+        float obstacleRotation;
+        float obstacleScale;
         Color obstacleColor;
         float obstacleSpeedX = 100;
         float obstacleSpeedY = 100;
         Texture2D mob;
         Random rng = new Random();  
 
-        public Obstacle(Vector2 position, Vector2 size, Color color)
+        public Obstacle(Texture2D texture, Vector2 position, float rotation, float scale, Color color)
         {
             //Initializing the required inputs for the obstacle
             obstaclePos = position;
-            obstacleSize = size;
+            obstacleTexture = texture;
+            obstacleRotation = rotation;
+            obstacleScale = scale;
             obstacleColor = color;
-            obstacleSpeedY = obstacleSpeedY * rng.NextSingle();
+            obstacleSpeedY = obstacleSpeedY * rng.Next();
         }
 
         public void DrawObstacle()
-        {  
+        {           
             
-            //Draw the obstacle on screen
-            Raylib.DrawRectangleV(obstaclePos, obstacleSize, obstacleColor);
+            
+        }
+
+        public void DrawMobImage()
+        {
+            Raylib.DrawTextureEx(obstacleTexture, obstaclePos, obstacleRotation, obstacleScale, obstacleColor);            
         }
 
         public void MoveObstacle()
         {
-            obstaclePos.Y = obstaclePos.Y + obstacleSpeedY * Raylib.GetFrameTime();
+              obstaclePos.Y = obstaclePos.Y + obstacleSpeedY * Raylib.GetFrameTime();  
+                
         } 
 
         public void ObstacleScreenBoundaries()
@@ -51,7 +61,7 @@ namespace Obstacle_Mapping
             }
         }
 
-        public Texture2D DrawMobImage(string filename)
+        public Texture2D InitializeMobImage(string filename)
         {
             //Loading texture assets for the obstacles            
             Image mobAsset = Raylib.LoadImage($"../../../../../BG 2.0/BG/{filename}");
