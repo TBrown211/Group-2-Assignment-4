@@ -23,7 +23,8 @@ namespace Obstacle_Mapping
         }
 
         public void DrawObstacle()
-        {            
+        {  
+            
             //Draw the obstacle on screen
             Raylib.DrawRectangleV(obstaclePos, obstacleSize, obstacleColor);
         }
