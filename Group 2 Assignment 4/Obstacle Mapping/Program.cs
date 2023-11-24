@@ -49,20 +49,8 @@ namespace Obstacle_Mapping
         }
         static void Setup()
         {
-            int randomLevel = rng.Next(levels.Length);
-            if(randomLevel == levels[0])
-            {
-                Lvl1();
-            }
-            if(randomLevel == levels[1])
-            {
-                Lvl2();
-            }
-            if(randomLevel == levels[2])
-            {
-                Lvl3();
-            }
-            
+
+            LevelSetup(); 
             
 
 
@@ -73,6 +61,31 @@ namespace Obstacle_Mapping
 
         static void Update()
         {
+            LevelUpdate();            
+
+
+        }
+
+        static public void LevelSetup()
+        {
+            int randomLevel = rng.Next(levels.Length);
+            if (randomLevel == levels[0])
+            {
+                Lvl1();
+            }
+            if (randomLevel == levels[1])
+            {
+                Lvl2();
+            }
+            if (randomLevel == levels[2])
+            {
+                Lvl3();
+            }
+
+        }
+
+        static public void LevelUpdate()
+        {
             int randomVariable = rng.Next(levels.Length);
             Raylib.DrawTexture(level, 0, 0, Color.WHITE);
             Raylib.DrawTextureV(mob, obstaclePosition, Color.WHITE);
@@ -81,15 +94,14 @@ namespace Obstacle_Mapping
                 for (int i = 0; i < obstacles.Length; i++)
                 {
                     obstacles[i].DrawObstacle();
-                    obstacles[i].DrawMobImage("Mobs_02.png");
-                }                
+                }
             }
             else if (randomVariable == levels[1])
             {
                 for (int i = 0; i < obstacles.Length; i++)
                 {
                     obstacles[i].DrawObstacle();
-                }                
+                }
             }
             else if (randomVariable == levels[2])
             {
@@ -98,10 +110,8 @@ namespace Obstacle_Mapping
                     obstacles[i].DrawObstacle();
                     obstacles[i].MoveObstacle();
                     obstacles[i].ObstacleScreenBoundaries();
-                }                
+                }
             }
-            
-
 
         }
 
