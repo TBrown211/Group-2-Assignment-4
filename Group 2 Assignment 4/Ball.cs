@@ -8,15 +8,25 @@ namespace Group_2_Assignment_4
         Vector2 position;
         Vector2 speed;
         float radius;
+        Texture2D texture;
+
         public Ball() 
         {
             radius = 10;
             ResetFireBall();
         }
 
+        public void LoadTexture()
+        {
+            Image image = Raylib.LoadImage("../../../Assets/Texture/Effects_Fire_0_14.png");
+            texture = Raylib.LoadTextureFromImage(image);
+        }
+
         public void Draw()
         {
             Raylib.DrawCircleV(position, radius, Color.RED);
+            Raylib.DrawRectangleV(position, new Vector2(texture.Width, texture.Height), Color.DARKGREEN);
+            Raylib.DrawTextureV(texture, position, Color.WHITE);
         }
 
         public void MoveBall()

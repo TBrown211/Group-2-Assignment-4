@@ -42,6 +42,7 @@ namespace Group_2_Assignment_4
         static void Setup()
         {
             ball = new Ball();
+            ball.LoadTexture();
         }
 
         static void Update()
