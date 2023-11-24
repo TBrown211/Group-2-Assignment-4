@@ -7,6 +7,7 @@ namespace Obstacle_Mapping
     internal class Program
     {
         static public Obstacle[] obstacles;
+        static public int[] levels = {1, 2, 3};
         static int obstacleWidth = 50;
         static int obstacleHeight = 50;
         static Vector2 obstaclePosition;
@@ -48,7 +49,21 @@ namespace Obstacle_Mapping
         }
         static void Setup()
         {
-            Lvl3();
+            int randomLevel = rng.Next(levels.Length);
+            if(randomLevel == levels[0])
+            {
+                Lvl1();
+            }
+            if(randomLevel == levels[1])
+            {
+                Lvl2();
+            }
+            if(randomLevel == levels[2])
+            {
+                Lvl3();
+            }
+            
+            
 
 
 
@@ -58,16 +73,34 @@ namespace Obstacle_Mapping
 
         static void Update()
         {
-
-
+            int randomVariable = rng.Next(levels.Length);
             Raylib.DrawTexture(level, 0, 0, Color.WHITE);
             Raylib.DrawTextureV(mob, obstaclePosition, Color.WHITE);
-            for (int i = 0; i < obstacles.Length; i++)
+            if (randomVariable == levels[0])
             {
-                obstacles[i].DrawObstacle();
-                obstacles[i].MoveObstacle();
-                obstacles[i].ObstacleScreenBoundaries();
+                for (int i = 0; i < obstacles.Length; i++)
+                {
+                    obstacles[i].DrawObstacle();
+                    obstacles[i].DrawMobImage("Mobs_02.png");
+                }                
             }
+            else if (randomVariable == levels[1])
+            {
+                for (int i = 0; i < obstacles.Length; i++)
+                {
+                    obstacles[i].DrawObstacle();
+                }                
+            }
+            else if (randomVariable == levels[2])
+            {
+                for (int i = 0; i < obstacles.Length; i++)
+                {
+                    obstacles[i].DrawObstacle();
+                    obstacles[i].MoveObstacle();
+                    obstacles[i].ObstacleScreenBoundaries();
+                }                
+            }
+            
 
 
         }
@@ -76,7 +109,7 @@ namespace Obstacle_Mapping
         {
             //Initializing the first level 
             level = LevelTextures("battleback10.png");
-            mob = LevelTextures("Mobs_02.png");
+            
             int obsRows = 4;
             int obsCols = 1;
             obstacles = new Obstacle[obsRows * obsCols];
