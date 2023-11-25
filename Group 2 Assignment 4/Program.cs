@@ -39,15 +39,16 @@ namespace Group_2_Assignment_4
 
         static void Setup()
         {
-            paddleLeft = new Paddles(25);
-            paddleRight = new Paddles(Raylib.GetScreenWidth() - 45);
+            paddleLeft = new Paddles(25, KeyboardKey.KEY_W,KeyboardKey.KEY_S);
+            paddleRight = new Paddles(Raylib.GetScreenWidth() - 45, KeyboardKey.KEY_UP,KeyboardKey.KEY_DOWN);
         }
 
         static void Update()
         {
             paddleLeft.DrawPaddles();
             paddleRight.DrawPaddles();
-
+            paddleLeft.MovePaddles();
+            paddleRight.MovePaddles();
         }
     }
 }

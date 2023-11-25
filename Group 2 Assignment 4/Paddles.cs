@@ -12,7 +12,7 @@ namespace Group_2_Assignment_4
         KeyboardKey downArrow;
 
 
-        public Paddles(float paddlePositionX)
+        public Paddles(float paddlePositionX, KeyboardKey upArrow, KeyboardKey downArrow)
         {
             paddlePosition.X = paddlePositionX;
             paddlePosition.Y = Raylib.GetScreenHeight() / 2;
@@ -21,7 +21,8 @@ namespace Group_2_Assignment_4
 
             speed = 300;
 
-
+            this.upArrow = upArrow;
+            this.downArrow = downArrow;
         }
 
         public void DrawPaddles()
@@ -29,6 +30,53 @@ namespace Group_2_Assignment_4
             Raylib.DrawRectangleV(paddlePosition, paddleSize, Color.BLUE);
         }
 
+        public void Move()
+        {
+            float movementY = 0;
+
+            if (Raylib.IsKeyDown(upArrow))
+            {
+                movementY -= speed;
+            }
+
+            if (Raylib.IsKeyDown(downArrow))
+            {
+                movementY += speed;
+            }
+
+            paddlePosition.Y += movementY * Raylib.GetFrameTime();
+
+            if (paddlePosition.Y < 0)
+            {
+                paddlePosition.Y = 0;
+            }
+            else if (paddlePosition.Y > Raylib.GetScreenHeight() - paddleSize.Y)
+            {
+                paddlePosition.Y = Raylib.GetScreenHeight() - paddleSize.Y;
+            }
+
+
+        }
+
+        public void MovePaddles()
+        {
+            float movementY = 0;
+
+            if (Raylib.IsKeyDown(upArrow))
+            {
+                movementY -= speed;
+            }
+
+            if (Raylib.IsKeyDown(downArrow))
+            {
+                movementY += speed;
+            }
+
+            paddlePosition.Y += movementY * Raylib.GetFrameTime();
+
+
+
+        }
 
     }
 }
