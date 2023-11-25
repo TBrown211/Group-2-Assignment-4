@@ -74,7 +74,14 @@ namespace Group_2_Assignment_4
 
             paddlePosition.Y += movementY * Raylib.GetFrameTime();
 
-
+            if (paddlePosition.Y < 0)
+            {
+                paddlePosition.Y = 0;
+            }
+            else if (paddlePosition.Y > Raylib.GetScreenHeight() - paddleSize.Y)
+            {
+                paddlePosition.Y = Raylib.GetScreenHeight() - paddleSize.Y;
+            }
 
         }
 
