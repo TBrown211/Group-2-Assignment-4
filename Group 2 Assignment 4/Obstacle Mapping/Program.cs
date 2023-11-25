@@ -1,15 +1,12 @@
 ﻿using Raylib_cs;
 using System.Numerics;
-using System.Reflection.Emit;
 
 namespace Obstacle_Mapping
 {
     internal class Program
     {
         static public Obstacle[] obstacles;
-        static public int[] levels = {1, 2, 3};
-        static int obstacleWidth = 50;
-        static int obstacleHeight = 50;
+        static public int[] levels = {1, 2, 3};        
         
         static int obstaclePositionX;
         static int obstaclePositionY;
@@ -24,8 +21,10 @@ namespace Obstacle_Mapping
         {
             // Create a window to draw to. The arguments define width and height
             Raylib.InitWindow(800, 600, title);
+            
             // Set the target frames-per-second (FPS)
             Raylib.SetTargetFPS(60);
+            
 
             // Setup your game. This is a function YOU define.
             Setup();
@@ -65,18 +64,20 @@ namespace Obstacle_Mapping
         {
             int randomVariable = rng.Next(levels.Length);
             Raylib.DrawTexture(level, 0, 0, Color.WHITE);
-            Level1Update();
+            Level3Update();
             
 
 
         }
 
+        //Setup code for the levels
         static public void LevelSetup()
         {            
-            Lvl1();      
+            Lvl3();      
 
         }       
 
+        //Update code for the each level 
         static public void Level1Update()
         {
             for (int i = 0; i < obstacles.Length; i++)
@@ -102,7 +103,7 @@ namespace Obstacle_Mapping
 
         }
 
-        static public void Lvl1()
+        static public void Lvl1() 
         {
             //Initializing the first level 
             level = LevelTextures("battleback10.png");
@@ -123,6 +124,7 @@ namespace Obstacle_Mapping
 
         static public void Lvl2()
         {
+            //Initializing the second level
             level = LevelTextures("battleback9.png");
             mob = LevelTextures("Mobs_03.png");
             int obsRows = 2;
@@ -136,13 +138,14 @@ namespace Obstacle_Mapping
                 obstaclePositionX = 250 + (250 * horizontalIndex);
                 obstaclePositionY = 100 + (350 * verticalIndex);
                 
-                obstacles[i] = new Obstacle(mob, new Vector2(obstaclePositionX, obstaclePositionY), 0, 10, Color.WHITE);
+                obstacles[i] = new Obstacle(mob, new Vector2(obstaclePositionX, obstaclePositionY), 0, 1.3f, Color.WHITE);
             }
 
         }
 
         static public void Lvl3()
         {
+            //Initializing the third level
             level = LevelTextures("battleback8.png");
             mob = LevelTextures("Mobs_05.png");
             obstacles = new Obstacle[2];
@@ -153,7 +156,7 @@ namespace Obstacle_Mapping
                 int horizontalIndex = i;
                 obstaclePositionX = 250 + (250 * horizontalIndex);
                 obstaclePositionY = 50;                
-                obstacles[i] = new Obstacle(mob, new Vector2(obstaclePositionX, obstaclePositionY), 0, 10, Color.WHITE);
+                obstacles[i] = new Obstacle(mob, new Vector2(obstaclePositionX, obstaclePositionY), 0, 1.3f, Color.WHITE);
 
             }
 
@@ -161,7 +164,7 @@ namespace Obstacle_Mapping
 
         static public Texture2D LevelTextures(string filename)
         {
-            //Loading textures for level background
+            //Loading textures for level background and mob obstacles
             Image levelBackground = Raylib.LoadImage($"../../../../../BG 2.0/BG/{filename}");
             Texture2D mapTexture = Raylib.LoadTextureFromImage(levelBackground);
 
