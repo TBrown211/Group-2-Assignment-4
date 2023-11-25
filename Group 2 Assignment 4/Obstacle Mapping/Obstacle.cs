@@ -24,7 +24,7 @@ namespace Obstacle_Mapping
             obstacleRotation = rotation;
             obstacleScale = scale;
             obstacleColor = color;
-            obstacleSpeedY = obstacleSpeedY * rng.Next();
+            obstacleSpeedY = obstacleSpeedY * rng.Next(1, 5);
         }
 
         public void DrawObstacle()
