@@ -53,6 +53,7 @@ namespace Group_2_Assignment_4
             if (ballHitsTop || ballHitsBottom)
             {
                 speed.Y = -speed.Y;
+
             }
         }
 
@@ -108,7 +109,7 @@ namespace Group_2_Assignment_4
         }
         public void LoadFireBallSound()
         {
-            //Sound fxWav = LoadSound("resources/audio/sound.wav");
+            Sound sound = Raylib.LoadSound("../../../Assets/Audio/105016__julien-matthey__jm-fx-fireball-01.wav");
         }
     }
 }
