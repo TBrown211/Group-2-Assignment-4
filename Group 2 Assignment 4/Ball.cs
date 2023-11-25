@@ -9,7 +9,7 @@ namespace Group_2_Assignment_4
         Vector2 speed;
         float radius;
         Texture2D texture;
-
+        Sound fireAudio;
 
         public Ball() 
         {
@@ -21,6 +21,11 @@ namespace Group_2_Assignment_4
         {
             Image image = Raylib.LoadImage("../../../Assets/Texture/Effects_Fire_0_14.png");
             texture = Raylib.LoadTextureFromImage(image);
+        }
+        public void LoadFireBallSound()
+        {
+            Wave wave = Raylib.LoadWave("../../../Assets/Audio/105016__julien-matthey__jm-fx-fireball-01.wav");
+            fireAudio = Raylib.LoadSoundFromWave(wave);
         }
 
         public void Draw()
@@ -53,7 +58,7 @@ namespace Group_2_Assignment_4
             if (ballHitsTop || ballHitsBottom)
             {
                 speed.Y = -speed.Y;
-
+                Raylib.PlaySound(fireAudio);
             }
         }
 
@@ -107,9 +112,10 @@ namespace Group_2_Assignment_4
         {
             return radius;
         }
-        public void LoadFireBallSound()
+
+        public Sound ReturnFireAudio() //Call this function when you want to get the audio for the fireball
         {
-            Sound sound = Raylib.LoadSound("../../../Assets/Audio/105016__julien-matthey__jm-fx-fireball-01.wav");
+            return fireAudio;
         }
     }
 }

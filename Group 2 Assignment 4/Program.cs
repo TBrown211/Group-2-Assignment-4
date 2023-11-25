@@ -17,6 +17,8 @@ namespace Group_2_Assignment_4
             Raylib.InitWindow(800, 600, title);
             // Set the target frames-per-second (FPS)
             Raylib.SetTargetFPS(60);
+            //Intalize the audio
+            Raylib.InitAudioDevice();
 
             // Setup your game. This is a function YOU define.
             Setup();
@@ -43,6 +45,7 @@ namespace Group_2_Assignment_4
         {
             ball = new Ball();
             ball.LoadFireballTexture();
+            ball.LoadFireBallSound();
         }
 
         static void Update()
