@@ -10,10 +10,8 @@ namespace Obstacle_Mapping
         Vector2 obstacleSize;
         float obstacleRotation;
         float obstacleScale;
-        Color obstacleColor;
-        float obstacleSpeedX = 100;
-        float obstacleSpeedY = 100;
-        Texture2D mob;
+        Color obstacleColor;       
+        float obstacleSpeedY = 100;        
         Random rng = new Random();  
 
         public Obstacle(Texture2D texture, Vector2 position, float rotation, float scale, Color color)
@@ -26,12 +24,7 @@ namespace Obstacle_Mapping
             obstacleColor = color;
             obstacleSpeedY = obstacleSpeedY * rng.Next(1, 5);
         }
-
-        public void DrawObstacle()
-        {           
-            
-            
-        }
+       
 
         public void DrawMobImage()
         {
