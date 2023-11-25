@@ -10,13 +10,14 @@ namespace Group_2_Assignment_4
         float radius;
         Texture2D texture;
 
+
         public Ball() 
         {
             radius = 10;
             ResetFireBall();
         }
 
-        public void LoadTexture()
+        public void LoadFireballTexture()
         {
             Image image = Raylib.LoadImage("../../../Assets/Texture/Effects_Fire_0_14.png");
             texture = Raylib.LoadTextureFromImage(image);
@@ -24,9 +25,16 @@ namespace Group_2_Assignment_4
 
         public void Draw()
         {
-            Raylib.DrawCircleV(position, radius, Color.RED);
-            Raylib.DrawRectangleV(position, new Vector2(texture.Width, texture.Height), Color.DARKGREEN);
-            Raylib.DrawTextureV(texture, position, Color.WHITE);
+            Raylib.DrawCircleV(position, radius, Color.BLANK);
+            Raylib.DrawTexturePro(
+                texture,
+                new Rectangle(0, 0, texture.Width, texture.Height), //Source Rectangle
+                new Rectangle(position.X, position.Y,texture.Width/2, texture.Height/2), //Dest Rectangle
+                new Vector2(60,27), //Origin
+                0, //Roatation
+                Color.WHITE
+                );
+
         }
 
         public void MoveBall()
@@ -98,9 +106,9 @@ namespace Group_2_Assignment_4
         {
             return radius;
         }
-        public void TheSoundOfFireBall()
+        public void LoadFireBallSound()
         {
-
+            //Sound fxWav = LoadSound("resources/audio/sound.wav");
         }
     }
 }
