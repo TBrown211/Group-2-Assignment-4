@@ -99,11 +99,20 @@ namespace Obstacle_Mapping
         //Update code for the each level 
         static public void StationaryLevelUpdate()
         {
+
+            
+
+
             for (int i = 0; i < obstacles.Length; i++)
             {
+                if (Raylib.CheckCollisionCircleRec(ball.FireBallPosition(),
+                ball.FireBallRadius(),
+                new Rectangle(obstaclePositionX, obstaclePositionY, 50, 50)))
+                {
+                    ball.FireBallIsReflected();
+                }
                 obstacles[i].DrawMobImage();
-                obstacles[i].MobPosition();
-                obstacles[i].BallCollisionCheck();
+                obstacles[i].MobPosition();                
             }
         }
         
