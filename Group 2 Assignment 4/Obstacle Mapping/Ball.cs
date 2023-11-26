@@ -26,6 +26,7 @@ namespace Obstacle_Mapping
         public void Draw()
         {
             Raylib.DrawCircleV(position, radius, Color.BLANK);
+            Raylib.DrawRectangleV(position, new Vector2(texture.Width, texture.Height), Color.SKYBLUE);
             Raylib.DrawTexturePro(
                 texture,
                 new Rectangle(0, 0, texture.Width, texture.Height), //Source Rectangle
