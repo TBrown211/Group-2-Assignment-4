@@ -67,7 +67,7 @@ namespace Obstacle_Mapping
 
             int randomVariable = rng.Next(levels.Length);
             Raylib.DrawTexture(level, 0, 0, Color.WHITE);
-            Level3Update();
+            StationaryLevelUpdate();
              ball.MoveBall();
             ball.CollideBall();
             if (ball.BallIsPastRightEdge())
@@ -92,26 +92,22 @@ namespace Obstacle_Mapping
         //Setup code for the levels
         static public void LevelSetup()
         {            
-            Lvl2();      
+            Lvl1();      
 
         }       
 
         //Update code for the each level 
-        static public void Level1Update()
+        static public void StationaryLevelUpdate()
         {
             for (int i = 0; i < obstacles.Length; i++)
             {
                 obstacles[i].DrawMobImage();
+                obstacles[i].MobPosition();
+                obstacles[i].BallCollisionCheck();
             }
         }
-        static public void Level2Update()
-        {
-            for (int i = 0; i < obstacles.Length; i++)
-            {
-                obstacles[i].DrawMobImage();
-            }
-        }
-        static public void Level3Update()
+        
+        static public void MovementLevelUpdate()
         {
             for (int i = 0; i < obstacles.Length; i++)
             {
