@@ -30,13 +30,16 @@ namespace Group_2_Assignment_4
 
         public void Draw()
         {
+            float angleOfTexture = MathF.Atan2(speed.Y, speed.X) / MathF.PI *180;
+            float roatation = angleOfTexture;
+
             Raylib.DrawCircleV(position, radius, Color.BLANK);
             Raylib.DrawTexturePro(
                 texture,
                 new Rectangle(0, 0, texture.Width, texture.Height), //Source Rectangle
                 new Rectangle(position.X, position.Y,texture.Width/2, texture.Height/2), //Dest Rectangle
-                new Vector2(60,27), //Origin
-                0, //Roatation
+                new Vector2(60, 27), //Origin
+                roatation, //Roatation
                 Color.WHITE
                 );
 
