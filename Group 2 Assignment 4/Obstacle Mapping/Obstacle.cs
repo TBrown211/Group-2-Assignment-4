@@ -7,12 +7,13 @@ namespace Obstacle_Mapping
     {
         Vector2 obstaclePos;        
         Texture2D obstacleTexture;
-        Vector2 obstacleSize;
+        Vector2 obstacleSize = new Vector2(50, 50);
         float obstacleRotation;
         float obstacleScale;
         Color obstacleColor;       
         float obstacleSpeedY = 100;        
         Random rng = new Random();  
+        static Ball ball = new Ball();
 
         public Obstacle(Texture2D texture, Vector2 position, float rotation, float scale, Color color)
         {
@@ -28,7 +29,9 @@ namespace Obstacle_Mapping
 
         public void DrawMobImage()
         {
-            Raylib.DrawTextureEx(obstacleTexture, obstaclePos, obstacleRotation, obstacleScale, obstacleColor);            
+            Raylib.DrawRectangleV(obstaclePos, obstacleSize, Color.VIOLET);
+            Raylib.DrawTextureEx(obstacleTexture, obstaclePos, obstacleRotation, obstacleScale, obstacleColor);
+            
         }
 
         public void MoveObstacle()
@@ -52,6 +55,41 @@ namespace Obstacle_Mapping
             {
                 obstacleSpeedY = -obstacleSpeedY;
             }
+        }
+
+        public void BallCollisionCheck()
+        {
+            float topOfObstacle = obstaclePos.Y;
+            float bottomOfObstacle = obstaclePos.Y + obstacleSize.Y;
+            float leftOfObstacle = obstaclePos.X;
+            float rightOfObstacle = obstaclePos.X + obstacleSize.X;
+
+            bool isBallTouchingTop = ball.FireBallPosition().Y + ball.FireBallRadius() >= topOfObstacle;
+            bool isBallTouchingBottom = ball.FireBallPosition().Y - ball.FireBallRadius() <= bottomOfObstacle;
+            bool isBallTouchingLeft = ball.FireBallPosition().X + ball.FireBallRadius() >= leftOfObstacle;
+            bool isBallTouchingRight = ball.FireBallPosition().X - ball.FireBallRadius() <= rightOfObstacle;
+
+            if (isBallTouchingLeft || isBallTouchingRight)
+            {
+                ball.FireBallIsReflected();
+            }
+            else if (isBallTouchingTop || isBallTouchingBottom)
+            {
+                ball.FireBallIsReflected();
+            }
+
+            if (Raylib.CheckCollisionCircleRec(ball.FireBallPosition(), 
+                ball.FireBallRadius(), 
+                new Rectangle(obstaclePos.X, obstaclePos.Y, obstacleSize.X, obstacleSize.Y)))
+            {
+                ball.FireBallPosition();
+            }
+
+        }
+
+        public Vector2 MobPosition()
+        {
+            return obstaclePos;
         }
 
         public Texture2D InitializeMobImage(string filename)
