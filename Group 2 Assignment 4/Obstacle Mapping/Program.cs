@@ -5,6 +5,7 @@ namespace Obstacle_Mapping
 {
     internal class Program
     {
+        //Obstacle Constants
         static public Obstacle[] obstacles;
         static public int[] levels = {1, 2, 3};        
         
@@ -14,9 +15,13 @@ namespace Obstacle_Mapping
         static Texture2D level;
         static Texture2D mob;
 
-        static string title = "Game Title";
+        //Ball Constants
+        static string title = "Medievil Pong";
+        static Ball ball;
+        static int leftPlayerScore = 0;
+        static int rightPlayerScore = 0;
 
-        
+
         static void Main(string[] args)
         {
             // Create a window to draw to. The arguments define width and height
@@ -51,21 +56,35 @@ namespace Obstacle_Mapping
         static void Setup()
         {
 
-            LevelSetup(); 
-            
-
-
-
-
+            LevelSetup();
+            ball = new Ball();
+            ball.LoadFireballTexture();
         }
 
 
         static void Update()
         {
+
             int randomVariable = rng.Next(levels.Length);
             Raylib.DrawTexture(level, 0, 0, Color.WHITE);
             Level3Update();
-            
+             ball.MoveBall();
+            ball.CollideBall();
+            if (ball.BallIsPastRightEdge())
+            {
+                leftPlayerScore++;
+                ball.ResetFireBall();
+            }
+            if (ball.BallIsPastLeftEdge())
+            {
+                rightPlayerScore++;
+                ball.ResetFireBall();
+            }
+
+            Raylib.DrawText(leftPlayerScore.ToString(), 50, 50, 32, Color.BLACK);
+            Raylib.DrawText(rightPlayerScore.ToString(), 750, 50, 32, Color.BLACK);
+
+            ball.Draw();
 
 
         }
@@ -73,7 +92,7 @@ namespace Obstacle_Mapping
         //Setup code for the levels
         static public void LevelSetup()
         {            
-            Lvl3();      
+            Lvl2();      
 
         }       
 
@@ -96,7 +115,7 @@ namespace Obstacle_Mapping
         {
             for (int i = 0; i < obstacles.Length; i++)
             {
-                obstacles[i].DrawMobImage();
+                obstacles[i].DrawMobImage(); 
                 obstacles[i].MoveObstacle();
                 obstacles[i].ObstacleScreenBoundaries();
             }
