@@ -10,8 +10,8 @@ namespace Group_2_Assignment_4
         float speed;
         KeyboardKey upArrow;
         KeyboardKey downArrow;
-
-
+        Texture2D leftShield = LoadTexture2D("leftshield.png");
+        Texture2D rightShield = LoadTexture2D("rightshield.png");
         public Paddles(float paddlePositionX, KeyboardKey upArrow, KeyboardKey downArrow)
         {
             paddlePosition.X = paddlePositionX;
@@ -25,9 +25,14 @@ namespace Group_2_Assignment_4
             this.downArrow = downArrow;
         }
 
-        public void DrawPaddles()
+        public void DrawPaddleLeft()
         {
-            Raylib.DrawRectangleV(paddlePosition, paddleSize, Color.BLUE);
+            Raylib.DrawTextureV(leftShield, paddlePosition, Color.WHITE);
+        }
+
+        public void DrawPaddleRight()
+        {
+            Raylib.DrawTextureV(rightShield, paddlePosition, Color.WHITE);
         }
 
 
@@ -84,6 +89,13 @@ namespace Group_2_Assignment_4
             bool hitBottomEdge = ballTopEdge <= paddleBottomEdge;
 
             bool hasHit = hitRightEdge && hitLeftEdge && hitTopEdge && hitBottomEdge;
+        }
+
+        static Texture2D LoadTexture2D(string fileName)
+        {
+            Image image = Raylib.LoadImage($"../../../../resources/textures/{fileName}");
+            Texture2D texture = Raylib.LoadTextureFromImage(image);
+            return texture;
         }
 
     }

@@ -9,6 +9,8 @@ namespace Group_2_Assignment_4
         static string title = "Game Title";
         static Paddles paddleLeft;
         static Paddles paddleRight;
+
+
         static void Main(string[] args)
         {
             // Create a window to draw to. The arguments define width and height
@@ -39,16 +41,20 @@ namespace Group_2_Assignment_4
 
         static void Setup()
         {
+
             paddleLeft = new Paddles(25, KeyboardKey.KEY_W,KeyboardKey.KEY_S);
             paddleRight = new Paddles(Raylib.GetScreenWidth() - 45, KeyboardKey.KEY_UP,KeyboardKey.KEY_DOWN);
+
         }
 
         static void Update()
         {
-            paddleLeft.DrawPaddles();
-            paddleRight.DrawPaddles();
+            paddleLeft.DrawPaddleLeft();
+            paddleRight.DrawPaddleRight();
             paddleLeft.MovePaddles();
             paddleRight.MovePaddles();
         }
+
+
     }
 }
