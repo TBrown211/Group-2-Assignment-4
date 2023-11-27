@@ -15,9 +15,8 @@ namespace Group_2_Assignment_4
         static int obstaclePositionY;
         static Random rng = new Random();
         static Texture2D level;
-        static Texture2D mob;
+        static Texture2D mob;        
         
-        static string title = "Medievil Pong";
         
         
 
