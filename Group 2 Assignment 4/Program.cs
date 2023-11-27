@@ -18,9 +18,8 @@ namespace Group_2_Assignment_4
 
         //Ball Constants
         static string title = "Medievil Pong";
-        static Ball ball;
-        static int leftPlayerScore = 0;
-        static int rightPlayerScore = 0;
+        
+        
 
 
         static void Main(string[] args)
@@ -58,8 +57,7 @@ namespace Group_2_Assignment_4
         {
 
             LevelSetup();
-            ball = new Ball();
-            ball.LoadFireballTexture();
+            
         }
 
 
@@ -68,23 +66,7 @@ namespace Group_2_Assignment_4
             
             Raylib.DrawTexture(level, 0, 0, Color.WHITE);
             StationaryLevelUpdate();
-            ball.MoveBall();
-            ball.CollideBall();
-            if (ball.BallIsPastRightEdge())
-            {
-                leftPlayerScore++;
-                ball.ResetFireBall();
-            }
-            if (ball.BallIsPastLeftEdge())
-            {
-                rightPlayerScore++;
-                ball.ResetFireBall();
-            }
-
-            Raylib.DrawText(leftPlayerScore.ToString(), 50, 50, 32, Color.BLACK);
-            Raylib.DrawText(rightPlayerScore.ToString(), 750, 50, 32, Color.BLACK);
-
-            ball.Draw();
+            
 
 
         }
@@ -98,16 +80,7 @@ namespace Group_2_Assignment_4
 
         //Update code for the each level 
         static public void StationaryLevelUpdate() //Code for levels with no movement to the obstacles (levels 1, 2)
-        {
-            if (Raylib.CheckCollisionCircleRec(ball.FireBallPosition(),
-                ball.FireBallRadius(),
-                new Rectangle(obstaclePositionX, obstaclePositionY, 50, 50)))
-            {
-                ball.FireBallIsReflected();
-            }
-
-
-
+        {          
             for (int i = 0; i < obstacles.Length; i++)
             {
                 

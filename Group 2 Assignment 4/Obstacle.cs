@@ -13,7 +13,7 @@ namespace Group_2_Assignment_4
         Color obstacleColor;       
         float obstacleSpeedY = 100;        
         Random rng = new Random();  
-        static Ball ball = new Ball();
+        
 
         public Obstacle(Texture2D texture, Vector2 position, float rotation, float scale, Color color)
         {
@@ -64,26 +64,7 @@ namespace Group_2_Assignment_4
             float leftOfObstacle = obstaclePos.X;
             float rightOfObstacle = obstaclePos.X + obstacleSize.X;
 
-            bool isBallTouchingTop = ball.FireBallPosition().Y + ball.FireBallRadius() >= topOfObstacle;
-            bool isBallTouchingBottom = ball.FireBallPosition().Y - ball.FireBallRadius() <= bottomOfObstacle;
-            bool isBallTouchingLeft = ball.FireBallPosition().X + ball.FireBallRadius() >= leftOfObstacle;
-            bool isBallTouchingRight = ball.FireBallPosition().X - ball.FireBallRadius() <= rightOfObstacle;
-
-            if (isBallTouchingLeft || isBallTouchingRight)
-            {
-                ball.FireBallIsReflected();
-            }
-            else if (isBallTouchingTop || isBallTouchingBottom)
-            {
-                ball.FireBallIsReflected();
-            }
-
-            if (Raylib.CheckCollisionCircleRec(ball.FireBallPosition(), 
-                ball.FireBallRadius(), 
-                new Rectangle(obstaclePos.X, obstaclePos.Y, obstacleSize.X, obstacleSize.Y)))
-            {
-                ball.FireBallPosition();
-            }
+           
 
         }
 
