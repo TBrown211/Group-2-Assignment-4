@@ -1,4 +1,4 @@
-﻿using Obstacle_Mapping;
+﻿
 using Raylib_cs;
 using System.Numerics;
 
@@ -99,20 +99,21 @@ namespace Group_2_Assignment_4
         //Update code for the each level 
         static public void StationaryLevelUpdate()
         {
-
+            if (Raylib.CheckCollisionCircleRec(ball.FireBallPosition(),
+                ball.FireBallRadius(),
+                new Rectangle(obstaclePositionX, obstaclePositionY, 50, 50)))
+            {
+                ball.FireBallIsReflected();
+            }
 
 
 
             for (int i = 0; i < obstacles.Length; i++)
             {
-                if (Raylib.CheckCollisionCircleRec(ball.FireBallPosition(),
-                ball.FireBallRadius(),
-                new Rectangle(obstaclePositionX, obstaclePositionY, 50, 50)))
-                {
-                    ball.FireBallIsReflected();
-                }
+                
                 obstacles[i].DrawMobImage();
                 obstacles[i].MobPosition();
+                obstacles[i].BallCollisionCheck();
             }
         }
 
@@ -123,6 +124,8 @@ namespace Group_2_Assignment_4
                 obstacles[i].DrawMobImage();
                 obstacles[i].MoveObstacle();
                 obstacles[i].ObstacleScreenBoundaries();
+                obstacles[i].BallCollisionCheck();
+                
             }
 
         }
@@ -189,7 +192,7 @@ namespace Group_2_Assignment_4
         static public Texture2D LevelTextures(string filename)
         {
             //Loading textures for level background and mob obstacles
-            Image levelBackground = Raylib.LoadImage($"../../../../../BG 2.0/BG/{filename}");
+            Image levelBackground = Raylib.LoadImage($"../../../BG 2.0/BG/{filename}");
             Texture2D mapTexture = Raylib.LoadTextureFromImage(levelBackground);
 
             return mapTexture;

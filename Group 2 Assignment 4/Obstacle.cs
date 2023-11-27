@@ -1,19 +1,18 @@
-﻿using Obstacle_Mapping;
-using Raylib_cs;
+﻿using Raylib_cs;
 using System.Numerics;
 
 namespace Group_2_Assignment_4
 {
     internal class Obstacle
     {
-        Vector2 obstaclePos;
+        Vector2 obstaclePos;        
         Texture2D obstacleTexture;
         Vector2 obstacleSize = new Vector2(50, 50);
         float obstacleRotation;
         float obstacleScale;
-        Color obstacleColor;
-        float obstacleSpeedY = 100;
-        Random rng = new Random();
+        Color obstacleColor;       
+        float obstacleSpeedY = 100;        
+        Random rng = new Random();  
         static Ball ball = new Ball();
 
         public Obstacle(Texture2D texture, Vector2 position, float rotation, float scale, Color color)
@@ -26,20 +25,20 @@ namespace Group_2_Assignment_4
             obstacleColor = color;
             obstacleSpeedY = obstacleSpeedY * rng.Next(1, 5);
         }
-
+       
 
         public void DrawMobImage()
         {
             Raylib.DrawRectangleV(obstaclePos, obstacleSize, Color.VIOLET);
             Raylib.DrawTextureEx(obstacleTexture, obstaclePos, obstacleRotation, obstacleScale, obstacleColor);
-
+            
         }
 
         public void MoveObstacle()
         {
-            obstaclePos.Y = obstaclePos.Y + obstacleSpeedY * Raylib.GetFrameTime();
-
-        }
+              obstaclePos.Y = obstaclePos.Y + obstacleSpeedY * Raylib.GetFrameTime();  
+                
+        } 
 
         public void ObstacleScreenBoundaries()
         {
@@ -79,8 +78,8 @@ namespace Group_2_Assignment_4
                 ball.FireBallIsReflected();
             }
 
-            if (Raylib.CheckCollisionCircleRec(ball.FireBallPosition(),
-                ball.FireBallRadius(),
+            if (Raylib.CheckCollisionCircleRec(ball.FireBallPosition(), 
+                ball.FireBallRadius(), 
                 new Rectangle(obstaclePos.X, obstaclePos.Y, obstacleSize.X, obstacleSize.Y)))
             {
                 ball.FireBallPosition();
@@ -98,7 +97,7 @@ namespace Group_2_Assignment_4
             //Loading texture assets for the obstacles            
             Image mobAsset = Raylib.LoadImage($"../../../../../BG 2.0/BG/{filename}");
             Texture2D obstacleImage = Raylib.LoadTextureFromImage(mobAsset);
-
+            
             return obstacleImage;
 
         }
