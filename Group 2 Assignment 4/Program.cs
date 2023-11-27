@@ -15,8 +15,7 @@ namespace Group_2_Assignment_4
         static Random rng = new Random();
         static Texture2D level;
         static Texture2D mob;
-
-        //Ball Constants
+        
         static string title = "Medievil Pong";
         
         
