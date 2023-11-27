@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Group_2_Assignment_4
 {
-    internal class Ball
+    public class Ball
     {
         Vector2 position;
         Vector2 speed;

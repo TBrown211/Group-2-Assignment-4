@@ -12,6 +12,7 @@ namespace Group_2_Assignment_4
         KeyboardKey downArrow;
         Texture2D leftShield = LoadTexture2D("leftshield.png");
         Texture2D rightShield = LoadTexture2D("rightshield.png");
+        Sound fireAudio;
         public Paddles(float paddlePositionX, KeyboardKey upArrow, KeyboardKey downArrow)
         {
             paddlePosition.X = paddlePositionX;
@@ -68,10 +69,17 @@ namespace Group_2_Assignment_4
 
         // Checks if a paddle has hit the ball yet, if it does bool hasHit is true
         // hasHit can be used to change the direction of the ball.
-        public void HitBall(FakeBall ball)
+
+        public void LoadFireBallSound()
         {
-            Vector2 ballPosition = ball.GetPosition();
-            float ballRadius = ball.GetRadius();
+            Wave wave = Raylib.LoadWave("../../../Assets/Audio/105016__julien-matthey__jm-fx-fireball-01.wav");
+            fireAudio = Raylib.LoadSoundFromWave(wave);
+        }
+
+        public void HitBall(Ball ball)
+        {
+            Vector2 ballPosition = ball.FireBallPosition();
+            float ballRadius = ball.FireBallRadius();
 
             float ballLeftEdge = ballPosition.X - ballRadius;
             float ballRightEdge = ballPosition.X + ballRadius;
@@ -89,6 +97,11 @@ namespace Group_2_Assignment_4
             bool hitBottomEdge = ballTopEdge <= paddleBottomEdge;
 
             bool hasHit = hitRightEdge && hitLeftEdge && hitTopEdge && hitBottomEdge;
+            if (hasHit)
+            {
+                ball.FireBallIsReflected();
+                Raylib.PlaySound(fireAudio);
+            }
         }
 
         static Texture2D LoadTexture2D(string fileName)
