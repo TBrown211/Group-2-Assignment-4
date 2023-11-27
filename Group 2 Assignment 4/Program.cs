@@ -78,6 +78,8 @@ namespace Group_2_Assignment_4
 
         static void Update()
         {
+            Raylib.DrawTexture(level, 0, 0, Color.WHITE);
+            StationaryLevelUpdate();
 
             ball.MoveBall();
             ball.CollideBall();
@@ -103,8 +105,7 @@ namespace Group_2_Assignment_4
             paddleLeft.MovePaddles();
             paddleRight.MovePaddles();
             
-            Raylib.DrawTexture(level, 0, 0, Color.WHITE);
-            StationaryLevelUpdate();
+            
             
 
 
