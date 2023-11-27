@@ -13,7 +13,8 @@ namespace Group_2_Assignment_4
         Texture2D leftShield = LoadTexture2D("leftshield.png");
         Texture2D rightShield = LoadTexture2D("rightshield.png");
         Sound fireAudio;
-        public Paddles(float paddlePositionX, KeyboardKey upArrow, KeyboardKey downArrow)
+        int id;
+        public Paddles(float paddlePositionX, KeyboardKey upArrow, KeyboardKey downArrow, int paddleID)
         {
             paddlePosition.X = paddlePositionX;
             paddlePosition.Y = Raylib.GetScreenHeight() / 2;
@@ -24,6 +25,7 @@ namespace Group_2_Assignment_4
 
             this.upArrow = upArrow;
             this.downArrow = downArrow;
+            id = paddleID;
         }
 
         public void DrawPaddleLeft()
@@ -99,7 +101,7 @@ namespace Group_2_Assignment_4
             bool hasHit = hitRightEdge && hitLeftEdge && hitTopEdge && hitBottomEdge;
             if (hasHit)
             {
-                ball.FireBallIsReflected();
+                ball.FireBallsReflected(id);
                 Raylib.PlaySound(fireAudio);
             }
         }

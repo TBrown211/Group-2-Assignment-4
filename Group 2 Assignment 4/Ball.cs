@@ -10,6 +10,7 @@ namespace Group_2_Assignment_4
         float radius;
         Texture2D texture;
         Sound fireAudio;
+        int lastPaddleHit;
 
         public Ball() 
         {
@@ -101,9 +102,15 @@ namespace Group_2_Assignment_4
 
         }
 
-        public void FireBallIsReflected() //Call this when the ball hits the paddle
+        public void FireBallsReflected(int paddleID)
         {
-            position.X = -position.X;
+            bool hasNotAlreadyHitPaddle = paddleID != lastPaddleHit;
+            if (hasNotAlreadyHitPaddle)
+            {
+                speed.X = -speed.X;
+                lastPaddleHit = paddleID;
+            }
+
         }
 
         public Vector2 FireBallPosition() //Call this function when you want to get the position of the fireball for other parts of the code.

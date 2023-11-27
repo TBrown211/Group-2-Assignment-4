@@ -7,7 +7,7 @@ namespace Group_2_Assignment_4
     {
         // If you need variables in the Program class (outside functions), you must mark them as static
 
-        static string title = "Medievil Pong";
+        static string title = "M E D I E V A L    P O N G";
         static Ball ball;
         static int leftPlayerScore = 0;
         static int rightPlayerScore = 0;
@@ -51,8 +51,8 @@ namespace Group_2_Assignment_4
             ball = new Ball();
             ball.LoadFireballTexture();
             ball.LoadFireBallSound();
-            paddleLeft = new Paddles(25, KeyboardKey.KEY_W,KeyboardKey.KEY_S);
-            paddleRight = new Paddles(Raylib.GetScreenWidth() - 45, KeyboardKey.KEY_UP,KeyboardKey.KEY_DOWN);
+            paddleLeft = new Paddles(25, KeyboardKey.KEY_W,KeyboardKey.KEY_S, 1);
+            paddleRight = new Paddles(Raylib.GetScreenWidth() - 45, KeyboardKey.KEY_UP,KeyboardKey.KEY_DOWN, 2);
 
 
         }
@@ -61,7 +61,12 @@ namespace Group_2_Assignment_4
         {
 
             ball.MoveBall();
+            paddleLeft.HitBall(ball);
+            paddleRight.HitBall(ball);
+
             ball.CollideBall();
+
+
             if (ball.BallIsPastRightEdge())
             {
                 leftPlayerScore++;
