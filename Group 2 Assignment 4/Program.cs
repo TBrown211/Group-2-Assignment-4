@@ -97,7 +97,7 @@ namespace Group_2_Assignment_4
         }
 
         //Update code for the each level 
-        static public void StationaryLevelUpdate()
+        static public void StationaryLevelUpdate() //Code for levels with no movement to the obstacles (levels 1, 2)
         {
             if (Raylib.CheckCollisionCircleRec(ball.FireBallPosition(),
                 ball.FireBallRadius(),
@@ -117,7 +117,7 @@ namespace Group_2_Assignment_4
             }
         }
 
-        static public void MovementLevelUpdate()
+        static public void MovementLevelUpdate() //Code for levels with movement (level 3)
         {
             for (int i = 0; i < obstacles.Length; i++)
             {
