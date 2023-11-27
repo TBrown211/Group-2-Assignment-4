@@ -6,10 +6,14 @@ namespace Group_2_Assignment_4
     internal class Program
     {
         // If you need variables in the Program class (outside functions), you must mark them as static
+
         static string title = "Medievil Pong";
         static Ball ball;
         static int leftPlayerScore = 0;
         static int rightPlayerScore = 0;
+        static Paddles paddleLeft;
+        static Paddles paddleRight;
+
 
         static void Main(string[] args)
         {
@@ -43,9 +47,14 @@ namespace Group_2_Assignment_4
 
         static void Setup()
         {
+
             ball = new Ball();
             ball.LoadFireballTexture();
             ball.LoadFireBallSound();
+            paddleLeft = new Paddles(25, KeyboardKey.KEY_W,KeyboardKey.KEY_S);
+            paddleRight = new Paddles(Raylib.GetScreenWidth() - 45, KeyboardKey.KEY_UP,KeyboardKey.KEY_DOWN);
+
+
         }
 
         static void Update()
@@ -68,6 +77,12 @@ namespace Group_2_Assignment_4
             Raylib.DrawText(rightPlayerScore.ToString(), 750, 50, 32, Color.BLACK);
 
             ball.Draw();
+
+
+            paddleLeft.DrawPaddleLeft();
+            paddleRight.DrawPaddleRight();
+            paddleLeft.MovePaddles();
+            paddleRight.MovePaddles();
         }
 
     }
