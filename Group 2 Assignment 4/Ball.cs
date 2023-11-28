@@ -102,15 +102,9 @@ namespace Group_2_Assignment_4
 
         }
 
-        public void FireBallsReflected(int paddleID)
+        public void FireBallsReflected() //Call this when the ball hits the paddle
         {
-            bool hasNotAlreadyHitPaddle = paddleID != lastPaddleHit;
-            if (hasNotAlreadyHitPaddle)
-            {
-                speed.X = -speed.X;
-                lastPaddleHit = paddleID;
-            }
-
+            speed.X = -speed.X;
         }
 
         public Vector2 FireBallPosition() //Call this function when you want to get the position of the fireball for other parts of the code.

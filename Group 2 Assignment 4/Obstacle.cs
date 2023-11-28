@@ -12,7 +12,8 @@ namespace Group_2_Assignment_4
         float obstacleScale;
         Color obstacleColor;       
         float obstacleSpeedY = 100;        
-        Random rng = new Random();  
+        Random rng = new Random();
+        public Paddles paddles;
         
 
         public Obstacle(Texture2D texture, Vector2 position, float rotation, float scale, Color color)
@@ -28,10 +29,8 @@ namespace Group_2_Assignment_4
        
 
         public void DrawMobImage()
-        {
-            Raylib.DrawRectangleV(obstaclePos, obstacleSize, Color.VIOLET);
-            Raylib.DrawTextureEx(obstacleTexture, obstaclePos, obstacleRotation, obstacleScale, obstacleColor);
-            
+        {            
+            Raylib.DrawTextureEx(obstacleTexture, obstaclePos, obstacleRotation, obstacleScale, obstacleColor);            
         }
 
         public void MoveObstacle()
@@ -57,14 +56,33 @@ namespace Group_2_Assignment_4
             }
         }
 
-        public void BallCollisionCheck()
+        public bool BallCollisionCheck(Ball ball)
         {
-            float topOfObstacle = obstaclePos.Y;
-            float bottomOfObstacle = obstaclePos.Y + obstacleSize.Y;
-            float leftOfObstacle = obstaclePos.X;
-            float rightOfObstacle = obstaclePos.X + obstacleSize.X;
+            Vector2 ballPosition = ball.FireBallPosition();
+            float ballRadius = ball.FireBallRadius();
 
-           
+            float leftOfFireBall = ballPosition.X - ballRadius;
+            float rightOfFireBall = ballPosition.X + ballRadius;
+            float topOfFireBall = ballPosition.Y - ballRadius;
+            float bottomOfFireBall = ballPosition.Y + ballRadius;
+
+            float topOfObstacle = obstaclePos.Y;
+            float bottomOfObstacle = obstaclePos.Y + obstacleTexture.Height;
+            float leftOfObstacle = obstaclePos.X;
+            float rightOfObstacle = obstaclePos.X + obstacleTexture.Width;
+
+            bool ballTouchesTop = bottomOfFireBall >= topOfObstacle;
+            bool ballTouchesBottom = topOfFireBall <= bottomOfObstacle;
+            bool ballTouchesLeft = leftOfFireBall <= rightOfObstacle;
+            bool ballTouchesRight = rightOfFireBall >= leftOfObstacle;
+            bool fireBallHitsObstacle = ballTouchesTop && ballTouchesBottom && ballTouchesLeft && ballTouchesRight;
+
+            if (fireBallHitsObstacle)
+            {
+                ball.FireBallsReflected();
+            }
+
+            return fireBallHitsObstacle;
 
         }
 

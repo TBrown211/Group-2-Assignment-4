@@ -128,7 +128,7 @@ namespace Group_2_Assignment_4
                 
                 obstacles[i].DrawMobImage();
                 obstacles[i].MobPosition();
-                obstacles[i].BallCollisionCheck();
+                obstacles[i].BallCollisionCheck(ball);
             }
         }
 
@@ -139,7 +139,7 @@ namespace Group_2_Assignment_4
                 obstacles[i].DrawMobImage();
                 obstacles[i].MoveObstacle();
                 obstacles[i].ObstacleScreenBoundaries();
-                obstacles[i].BallCollisionCheck();
+                obstacles[i].BallCollisionCheck(ball);
                 
             }
 
